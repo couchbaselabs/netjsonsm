@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
+    <AssemblyName>netjsonsm</AssemblyName>
+    <RootNamespace>netjsonsm</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+    <TargetFrameworks>$(TargetFrameworks);net452</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>
