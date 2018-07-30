@@ -1,17 +1,14 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using netjsonsm.Expressions;
 using netjsonsm.Matcher;
 using netjsonsm.Parsing;
-using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace netjsonsm.Tests
 {
-    public class SlowMatcherTests : IClassFixture<SlowMatcherTests.PeopleFixture>
+    public class SlowMatcherTests : IClassFixture<PeopleFixture>
     {
         private readonly IDictionary<string, string> _peopleData;
 
@@ -122,7 +119,7 @@ namespace netjsonsm.Tests
             const string json = "{ \"name\": \"mike\", \"age\": 10 }";
             var bytes = Encoding.UTF8.GetBytes(json);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
             Assert.True(matcher.Match(bytes));
         }
 
@@ -143,7 +140,7 @@ namespace netjsonsm.Tests
             const string json = "{ \"name\": \"mike\", \"age\": 50 }";
             var bytes = Encoding.UTF8.GetBytes(json);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
             Assert.True(matcher.Match(bytes));
         }
 
@@ -183,7 +180,7 @@ namespace netjsonsm.Tests
             var json = $"{{ \"age\": {value} }}";
             var bytes = Encoding.UTF8.GetBytes(json);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
             Assert.Equal(expected, matcher.Match(bytes));
         }
 
@@ -204,7 +201,7 @@ namespace netjsonsm.Tests
             var json = $"{{ \"age\": {value} }}";
             var bytes = Encoding.UTF8.GetBytes(json);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
             Assert.Equal(expected, matcher.Match(bytes));
         }
 
@@ -248,9 +245,9 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
-            var ids = new[] { "5b47eb091f57571d3c3b1aa1" };
+            var ids = new[] {"5b47eb091f57571d3c3b1aa1"};
             foreach (var entry in _peopleData.Where(x => ids.Contains(x.Key)))
             {
                 var data = Encoding.UTF8.GetBytes(entry.Value);
@@ -271,9 +268,9 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
-            var ids = new[] { "5b47eb096b1d911c0b9492fb" };
+            var ids = new[] {"5b47eb096b1d911c0b9492fb"};
             foreach (var entry in _peopleData.Where(x => ids.Contains(x.Key)))
             {
                 var data = Encoding.UTF8.GetBytes(entry.Value);
@@ -294,14 +291,17 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
-            var ids = new[] { "5b47eb0936ff92a567a0307e",
+            var ids = new[]
+            {
+                "5b47eb0936ff92a567a0307e",
                 "5b47eb0950e9076fc0aecd52",
                 "5b47eb095c3ad73b9925f7f8",
                 "5b47eb0962222a37d066e231",
                 "5b47eb09996a4154c35b2f98",
-                "5b47eb098eee4b4c4330ec64" };
+                "5b47eb098eee4b4c4330ec64"
+            };
             foreach (var entry in _peopleData.Where(x => ids.Contains(x.Key)))
             {
                 var data = Encoding.UTF8.GetBytes(entry.Value);
@@ -322,12 +322,15 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
-            var ids = new[] { "5b47eb096b1d911c0b9492fb",
+            var ids = new[]
+            {
+                "5b47eb096b1d911c0b9492fb",
                 "5b47eb093771f06ced629663",
                 "5b47eb09ffac5a6ce37042e7",
-                "5b47eb091f57571d3c3b1aa1" };
+                "5b47eb091f57571d3c3b1aa1"
+            };
             foreach (var entry in _peopleData.Where(x => ids.Contains(x.Key)))
             {
                 var data = Encoding.UTF8.GetBytes(entry.Value);
@@ -339,7 +342,7 @@ namespace netjsonsm.Tests
         public void TestMatcherNotTrueEquals()
         {
             const string expressionJson =
-@"
+                @"
 [""not"",
     [""equals"",
         [""field"", ""isActive""],
@@ -351,7 +354,7 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
             var ids = new[]
             {
@@ -462,7 +465,7 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
             var ids = new[]
             {
@@ -498,7 +501,7 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
             var ids = new[]
             {
@@ -532,7 +535,7 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
             var ids = new string[] { };
             foreach (var entry in _peopleData.Where(x => ids.Contains(x.Key)))
@@ -546,7 +549,7 @@ namespace netjsonsm.Tests
         public void TestMatcherEveryInEquals()
         {
             const string expressionJson =
-@"
+                @"
 [""everyin"",
     1,
     [""field"", ""testArray""],
@@ -560,9 +563,9 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
-            var ids = new []
+            var ids = new[]
             {
                 "5b47eb0936ff92a567a0307e",
                 "5b47eb09ffac5a6ce37042e7"
@@ -592,7 +595,7 @@ namespace netjsonsm.Tests
             var parser = new SimpleParser();
             var expression = parser.ParseJsonExpression(expressionBytes);
 
-            var matcher = new SlowMatcher(new[] { expression });
+            var matcher = new SlowMatcher(new[] {expression});
 
             var ids = new[]
             {
@@ -603,33 +606,6 @@ namespace netjsonsm.Tests
                 var data = Encoding.UTF8.GetBytes(entry.Value);
                 Assert.True(matcher.Match(data));
             }
-        }
-
-        #endregion
-
-        #region Test fixture
-
-        public class PeopleFixture
-        {
-            public PeopleFixture()
-            {
-                const string resourceName = "netjsonsm.Tests.people.json";
-
-                string json;
-                using (var stream = typeof(SlowMatcherTests).GetTypeInfo().Assembly.GetManifestResourceStream(resourceName))
-                using (var reader = new StreamReader(stream))
-                {
-                    json = reader.ReadToEnd();
-                }
-
-                Data = JArray.Parse(json)
-                    .ToDictionary(
-                        key => key.SelectToken("_id").Value<string>(),
-                        value => value.ToString()
-                    );
-            }
-
-            public Dictionary<string, string> Data { get; }
         }
 
         #endregion
